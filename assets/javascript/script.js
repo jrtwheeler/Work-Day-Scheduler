@@ -10,13 +10,21 @@ var millisecond = moment().get('millisecond');
 var displayTime = moment().format("dddd, MMMM Do, YYYY");
 var rowTime = $("div.hour");
 var rowTimeHours = $("div.hour").text;
+var textArea = $(".description");
+
 console.log(rowTimeHours)
 //Select the class currentDay and add text;
 $("#currentDay").text(displayTime);
 
 $('div.hour').each(function(){
     if ($(this).text().slice(-2) < hour){
-        console.log(hour)
+        textArea.addClass("bg-danger");
+    }
+    if ($(this).text().slice(-2) > hour){
+        textArea.addClass("future");
+    }
+    if ($(this).text().slice(-2) === hour){
+        textArea.addClass("present");
     }
   })
 
