@@ -9,23 +9,40 @@ var millisecond = moment().get('millisecond');
 
 var displayTime = moment().format("dddd, MMMM Do, YYYY");
 var rowTime = $("div.hour");
-var rowTimeHours = $("div.hour").text;
 var textArea = $(".description");
 
-console.log(rowTimeHours)
 //Select the class currentDay and add text;
-$("#currentDay").text(displayTime);
 
-$('div.hour').each(function(){
-    if ($(this).text().slice(-2) < hour){
+
+function plannerRowBackgrounds () {
+    var text = $(this).text();
+    var stringText = text.toString();
+    var stringTextTrimmed = stringText.trim();
+    var stringTextTrimmedSliced = stringTextTrimmed.substring(0, stringTextTrimmed.length - 2);
+    var stringTextTrimmedSlicedNumber = parseInt(stringTextTrimmedSliced);
+
+    if(stringTextTrimmedSlicedNumber >= 1 && stringTextTrimmedSlicedNumber <= 5){
+        stringTextTrimmedSlicedNumber = stringTextTrimmedSlicedNumber + 12;
+    }
+
+    if (stringTextTrimmedSlicedNumber < hour){
         textArea.addClass("bg-danger");
     }
-    if ($(this).text().slice(-2) > hour){
+    if (stringTextTrimmedSlicedNumber > hour){
         textArea.addClass("future");
     }
-    if ($(this).text().slice(-2) === hour){
+    if (stringTextTrimmedSlicedNumber === hour){
         textArea.addClass("present");
     }
-  })
+  }
+
+$("#currentDay").text(displayTime);
+$('.hour').each(plannerRowBackgrounds);
 
 //while (hour < )
+//event.preventDefault
+//var input = (whateverdiv).val().trim
+//set that to localStorage
+//get it from localStorage
+//data attribute
+//data-hour
