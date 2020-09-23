@@ -45,9 +45,19 @@ function plannerRowBackgrounds() {
 
   $(".saveBtn").on("click", function () {
     var textAreaClass = $(this).siblings('textarea');
-    localStorage.setItem("userInput", textAreaClass.val());  
+    var parentDiv = $(this).parent().attr("id");
+    localStorage.setItem(parentDiv.toString(), textAreaClass.val());  
   });
 
+  function renderPage (){
+    $(".saveBtn").each(function(){
+      var parentDiv = $(this).parent().attr("id");
+      var textAreaClass = $(this).siblings('textarea');
+      localStorage.getItem(parentDiv);
+      textAreaClass.val(localStorage.getItem(parentDiv));
+    })
+  }
 
 $("#currentDay").text(displayTime);
 $(".hour").each(plannerRowBackgrounds);
+renderPage ();
